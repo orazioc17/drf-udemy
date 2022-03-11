@@ -1,34 +1,44 @@
 from rest_framework.views import APIView
-from rest_framework.viewsets import ViewSet
+from rest_framework.viewsets import ViewSet, ModelViewSet
 from rest_framework.response import Response
 from rest_framework import status
 from posts.models import Post
 from posts.api.serializers import PostSerializer
 
 
-class PostViewSet(ViewSet):  # Mejor forma de manejar apis predeterminadas
-    def list(self, request):
-        """
-        Retorna la lista de posts creados
-        """
-        serializer = PostSerializer(Post.objects.all(), many=True)
-        return Response(status=status.HTTP_200_OK, data=serializer.data)
+class PostModelViewSet(ModelViewSet):
+    """
+    Solo con esta clase y esas 2 lineas, se tiene el CRUD completo de ver un post, modificarlo, crear posts y eliminar
+    posts, facilita y simplifica muchisimo trabajo, es para tenerlo en cuenta
+    """
+    serializer_class = PostSerializer
+    queryset = Post.objects.all()
+    #  http_method_names = ['get', 'put'] -- Con esta linea se puede delimitar que metodos http queremos o permitiremos
 
-    def retrieve(self, request, pk: int):
-        """
-        Retorna un solo post mediante su id
-        """
-        post = PostSerializer(Post.objects.get(pk=pk))
-        return Response(status=status.HTTP_200_OK, data=post.data)
 
-    def create(self, request):
-        """
-        Crea un post con la data que se reciba del json
-        """
-        serializer = PostSerializer(data=request.POST)
-        serializer.is_valid(raise_exception=True)
-        serializer.save()
-        return Response(status=status.HTTP_200_OK, data=serializer.data)
+# class PostViewSet(ViewSet):  # Mejor forma de manejar apis predeterminadas
+#    def list(self, request):
+#        """
+#        Retorna la lista de posts creados
+#        """
+#        serializer = PostSerializer(Post.objects.all(), many=True)
+#        return Response(status=status.HTTP_200_OK, data=serializer.data)
+
+#    def retrieve(self, request, pk: int):
+#        """
+#        Retorna un solo post mediante su id
+#        """
+#        post = PostSerializer(Post.objects.get(pk=pk))
+#        return Response(status=status.HTTP_200_OK, data=post.data)
+
+#    def create(self, request):
+#        """
+#        Crea un post con la data que se reciba del json
+#        """
+#        serializer = PostSerializer(data=request.POST)
+#        serializer.is_valid(raise_exception=True)
+#        serializer.save()
+#        return Response(status=status.HTTP_200_OK, data=serializer.data)
 
 
 # class PostApiView(APIView):
