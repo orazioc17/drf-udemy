@@ -1,0 +1,23 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>TITULO</title>
+</head>
+<body>
+    <h1>Hola mundo</h1>
+    <p>{{ name }}</p>
+    <p>Tengo {{ years }} anhos</p>
+    <p>Este es mi template 234239874 con Django</p>
+    <br>
+    <h3>Los lenguajes que se son:</h3>
+    <br>
+    {% for lenguaje in code %}
+        <p>{{ lenguaje }}</p>
+        <br>
+    {% endfor %}
+</body>
+</html>
