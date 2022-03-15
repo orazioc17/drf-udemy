@@ -2,6 +2,9 @@ from rest_framework.views import APIView
 from rest_framework.viewsets import ViewSet, ModelViewSet
 from rest_framework.response import Response
 from rest_framework import status
+from rest_framework.permissions import IsAuthenticated, IsAdminUser, IsAuthenticatedOrReadOnly  # Este ultimo es para
+# que solo los usuarios autenticados puedan usar metodos post, put y delete y los que no solo puedan usar get
+from posts.api.permissions import IsAdminOrReadOnly
 from posts.models import Post
 from posts.api.serializers import PostSerializer
 
@@ -11,6 +14,9 @@ class PostModelViewSet(ModelViewSet):
     Solo con esta clase y esas 2 lineas, se tiene el CRUD completo de ver un post, modificarlo, crear posts y eliminar
     posts, facilita y simplifica muchisimo trabajo, es para tenerlo en cuenta
     """
+    # permission_classes = [IsAuthenticatedOrReadOnly]  De esta manera se especifica que solo los que esten autenticados
+    # tengan acceso a este modelviewset
+    permission_classes = [IsAdminOrReadOnly]
     serializer_class = PostSerializer
     queryset = Post.objects.all()
     #  http_method_names = ['get', 'put'] -- Con esta linea se puede delimitar que metodos http queremos o permitiremos
