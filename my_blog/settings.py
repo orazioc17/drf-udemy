@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'drf_yasg',
 
     'posts',
+    'user',
 ]
 
 MIDDLEWARE = [
@@ -127,3 +128,5 @@ STATIC_ROOT = './static/'
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+AUTH_USER_MODEL = 'user.User'  # Con esto se le indica a Django que use el modelo User creado por nosotros
