@@ -12,7 +12,7 @@ https://docs.djangoproject.com/en/4.0/ref/settings/
 
 import datetime
 from pathlib import Path
-import postgres_credentials
+import credentials
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -22,7 +22,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/4.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-^6d02mxndemsbn+0g8w-49&+ta7pdmd92jldx07)x661!!_+50'
+SECRET_KEY = credentials.SECRET_KEY
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -84,10 +84,10 @@ WSGI_APPLICATION = 'my_blog.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'USER': postgres_credentials.USER,
-        'NAME': postgres_credentials.NAME,
-        'PASSWORD': postgres_credentials.PASSWORD,
-        'HOST': postgres_credentials.HOST
+        'USER': credentials.USER,
+        'NAME': credentials.NAME,
+        'PASSWORD': credentials.PASSWORD,
+        'HOST': credentials.HOST
     }
 }
 

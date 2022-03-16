@@ -1,4 +1,4 @@
 db.sqlite3
 venv/
 .idea/
-postgres_credentials.py
+credentials.py
